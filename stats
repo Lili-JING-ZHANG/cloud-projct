@@ -1,0 +1,9 @@
+nb-requete,cpu,ram,duration,duration 95th percentile,average,commentaire
+50,4,2,1655.3379957795141,658.6856169605255,cette requete  a ete faite en meme temps qu'une requete de 100 transcodage
+100,4,2,1338.45,414.18,au final on a fait 150 video en simultané
+50,4,2, 1631.7874947547912,429.95366280794144,une seule requete de 50 transcodage
+50,6,3,,,pas de ressources suffisantes
+10,2,2,134.51284785270687,68.19071416854858,tres bon 
+10,1,2,134.92359002828596,77.4662993590037,
+
+

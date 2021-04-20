@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tst-transcode
+spec:
+  backoffLimit: 0
+  parallelism: 1
+  # ttlSecondsAfterFinished: 0
+
+  template:
+    spec:
+      restartPolicy: Never
+        
+      containers:
+      - name: transcode
+        # image: registry.cloud.rennes.enst-bretagne.fr:5000/transcode
+        image:  gitlab-devops.cloud.rennes.enst-bretagne.fr:4567/pcloud/shared/transcode
+
+        env:
+        - name: OS_PROJECT_DOMAIN_NAME
+          value: 'Default'
+        - name: OS_USER_DOMAIN_NAME
+          value: 'Default'
+        - name: OS_PROJECT_NAME
+          value: 'demo'
+        - name: OS_USERNAME
+          value: 'demo'
+        - name: OS_PASSWORD
+          value: 'usr'
+        - name: OS_AUTH_URL
+          value: 'http://controller:5000/v3'
+        - name: OS_IDENTITY_API_VERSION
+          value: '3'
+
+
+        command: ["python3"]
+        args: ["transcode.py", "-x", "1234", "-i", "bbb_1.mp4", "-b", "1111", "-p", "ultrafast", "-d"]
+
+
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "4"
+
+
+      hostAliases:
+      - ip: '10.30.9.12'
+        hostnames:
+        - 'controller'
+
+      
+
